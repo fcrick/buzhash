@@ -1,0 +1,29 @@
+{
+  "name": "@fcrick/buzhash",
+  "version": "1.0.0",
+  "description": "minimal buz hash web assembly module",
+  "main": "index.js",
+  "type": "module",
+  "files": [
+    "assembly/index.d.ts",
+    "index.js",
+    "index.d.ts",
+    "optimized.wasm.js"
+  ],
+  "scripts": {
+    "test": "node tests/index.js",
+    "asbuild:untouched": "asc assembly/index.ts -b build/untouched.wasm -t build/untouched.wat --importMemory --sourceMap --debug --runtime none",
+    "asbuild:optimized": "asc assembly/index.ts -b build/optimized.wasm -t build/optimized.wat --importMemory --sourceMap --optimize --runtime none",
+    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized",
+    "build:wasmtobase64": "node -e 'fs.writeFileSync(`./optimized.wasm.js`, `export default Buffer.from(\"${fs.readFileSync(\"./build/optimized.wasm\").toString(\"base64\")}\", \"base64\")`)'",
+    "build:astypes": "tsc --build ./assembly/tsconfig.json",
+    "build": "npm run asbuild:optimized && npm run build:wasmtobase64 && npm run build:astypes",
+    "postinstall": "npm run build"
+  },
+  "author": "Francis Crick <fcrick@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "assemblyscript": "^0.13.3",
+    "typescript": "^3.9.6"
+  }
+}

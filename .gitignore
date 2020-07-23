@@ -1,0 +1,8 @@
+npm-debug.*
+docs/
+node_modules/
+out/
+raw/
+build/
+assembly/*.d.ts
+optimized.wasm.js
