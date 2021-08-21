@@ -12,12 +12,13 @@ const {
 const buffer = memory.buffer;
 const buzAddr = 0;
 
-findPhrase('Aenean massa. Cum sociis natoque')
-findPhrase('Aliquam lorem ante');
+findPhrase('Aenean massa. Cum sociis natoque', true)
+findPhrase('Aliquam lorem ante', true);
+findPhrase('Happy Gilmore', false);
 
 console.log("ok");
 
-function findPhrase(phrase) {
+function findPhrase(phrase, expectedResult) {
     const blockSize = phrase.length;
 
     init(buzAddr, blockSize);
@@ -67,7 +68,7 @@ function findPhrase(phrase) {
         }
     }
 
-    assert.equal(found, true, `Phrase not found`);
+    assert.equal(found, expectedResult, `Phrase ${expectedResult ? 'not' : ''} found`);
 }
 
 
