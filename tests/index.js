@@ -1,12 +1,13 @@
-const assert = require("assert");
+import assert from 'assert';
 
 const memory = new WebAssembly.Memory({initial:1});
+import parent from '../index.js'
 const {
     add,
     init,
     staticInit,
     size,
-} = require('..')({env:{memory:memory}});
+} = parent({env:{memory:memory}});
 
 const buffer = memory.buffer;
 const staticAddr = 0;
