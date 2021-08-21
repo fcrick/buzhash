@@ -23,7 +23,7 @@
   "author": "Francis Crick <fcrick@gmail.com>",
   "license": "ISC",
   "devDependencies": {
-    "assemblyscript": "^0.13.3",
+    "assemblyscript": "^0.13.8",
     "typescript": "^3.9.6"
   }
 }

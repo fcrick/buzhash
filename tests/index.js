@@ -10,13 +10,7 @@ const {
 } = parent({env:{memory:memory}});
 
 const buffer = memory.buffer;
-const staticAddr = 0;
-
-// fill first 1024 bytes with static data
-const staticSize = staticInit(staticAddr);
-assert.equal(staticSize, 1024, `${staticSize} bytes used`);
-
-const buzAddr = staticAddr + staticSize;
+const buzAddr = 0;
 
 findPhrase('Aenean massa. Cum sociis natoque')
 findPhrase('Aliquam lorem ante');
