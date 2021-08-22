@@ -1,4 +1,10 @@
 import wasmBuffer from './optimized.wasm.js'
 const compiled = new WebAssembly.Module(wasmBuffer)
-const wasmModule = new WebAssembly.Instance(compiled, {})
-export default wasmModule.exports
+export default function(imports) {
+    // usually caller will provide something, but if not, fill in the minimum
+    if (!imports) {
+        imports = {env: {memory: new WebAssembly.Memory({initial: 1})}}
+    }
+
+    return new WebAssembly.Instance(compiled, imports).exports
+}

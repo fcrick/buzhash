@@ -12,8 +12,8 @@
   ],
   "scripts": {
     "test": "node tests/index.js",
-    "asbuild:untouched": "asc assembly/index.ts --sourceMap --target debug --runtime stub",
-    "asbuild:optimized": "asc assembly/index.ts --sourceMap --target release --runtime stub",
+    "asbuild:untouched": "asc assembly/index.ts --importMemory --sourceMap --target debug --runtime stub",
+    "asbuild:optimized": "asc assembly/index.ts --importMemory --sourceMap --target release --runtime stub",
     "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized",
     "build:wasmtobase64": "node -e \"fs.writeFileSync(`./optimized.wasm.js`, `export default Buffer.from('${fs.readFileSync('./build/optimized.wasm').toString('base64')}', 'base64')`)\"",
     "build": "npm run asbuild:optimized && npm run build:wasmtobase64",

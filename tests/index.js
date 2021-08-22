@@ -1,7 +1,8 @@
 import assert from 'assert';
-import buzhash from '../index.js'
+import buzhashInit from '../index.js'
 
 const buzAddr = 0;
+const buzhash = buzhashInit()
 
 findPhrase('Aenean massa. Cum sociis natoque', true)
 findPhrase('Aliquam lorem ante', true);
