@@ -1,15 +1,6 @@
 import assert from 'assert';
+import buzhash from '../index.js'
 
-const memory = new WebAssembly.Memory({initial:1});
-import parent from '../index.js'
-const {
-    add,
-    init,
-    staticInit,
-    size,
-} = parent({env:{memory:memory}});
-
-const buffer = memory.buffer;
 const buzAddr = 0;
 
 findPhrase('Aenean massa. Cum sociis natoque', true)
@@ -21,14 +12,14 @@ console.log("ok");
 function findPhrase(phrase, expectedResult) {
     const blockSize = phrase.length;
 
-    init(buzAddr, blockSize);
+    buzhash.init(buzAddr, blockSize);
 
     const expectedSize = blockSize + 9;
-    assert.equal(size(blockSize), expectedSize, `size should be ${expectedSize}`);
+    assert.equal(buzhash.size(blockSize), expectedSize, `size should be ${expectedSize}`);
 
     let phraseHash = 0;
     for (let i = 0; i < phrase.length; ++i) {
-        phraseHash = add(buzAddr, phrase.charCodeAt(i));
+        phraseHash = buzhash.add(buzAddr, phrase.charCodeAt(i));
     }
 
     const loremipsum = `Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
@@ -57,11 +48,11 @@ function findPhrase(phrase, expectedResult) {
     ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.`;
 
     // reset our buz hash
-    init(buzAddr, blockSize);
+    buzhash.init(buzAddr, blockSize);
 
     let found = false;
     for (let i = 0; i < loremipsum.length; ++i) {
-        const hash = add(buzAddr, loremipsum.charCodeAt(i));
+        const hash = buzhash.add(buzAddr, loremipsum.charCodeAt(i));
         if (hash === phraseHash) {
             found = true;
             break;

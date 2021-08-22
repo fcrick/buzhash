@@ -6,3 +6,6 @@ raw/
 build/
 assembly/*.d.ts
 optimized.wasm.js
+*.wasm
+*.wasm.map
+*.asm.js
