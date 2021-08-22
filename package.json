@@ -23,8 +23,5 @@
   "license": "ISC",
   "devDependencies": {
     "assemblyscript": "^0.19.11"
-  },
-  "dependencies": {
-    "@assemblyscript/loader": "^0.19.11"
   }
 }
